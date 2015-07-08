@@ -1,3 +1,6 @@
+# Created by https://www.gitignore.io
+
+### Android ###
 # Built application files
 *.apk
 *.ap_
@@ -25,3 +28,17 @@ proguard/
 
 # Log Files
 *.log
+
+### Android Patch ###
+gen-external-apklibs
+
+
+### Gradle ###
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
