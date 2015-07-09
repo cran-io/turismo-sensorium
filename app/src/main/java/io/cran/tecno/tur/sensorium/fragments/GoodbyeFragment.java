@@ -31,7 +31,7 @@ public class GoodbyeFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
                 fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                getActivity().getFragmentManager().beginTransaction().remove(GoodbyeFragment.this).commit();
+                fm.beginTransaction().remove(GoodbyeFragment.this).commit();
             }
         });
         return root;

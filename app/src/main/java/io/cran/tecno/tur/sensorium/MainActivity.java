@@ -67,6 +67,17 @@ public class MainActivity extends Activity implements WelcomeFragment.Listener, 
     }
 
     @Override
+    public void onBackPressed() {
+        if (mGoodbyeFragment != null && mGoodbyeFragment.isVisible()) {
+            FragmentManager fm = getFragmentManager();
+            fm.beginTransaction().remove(mGoodbyeFragment).commit();
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void openCamera() {
         showCameraFragment();
     }

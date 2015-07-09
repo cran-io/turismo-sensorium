@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ov_main"
     tools:context="io.cran.tecno.tur.sensorium.fragments.WelcomeFragment">
 
     <Button
@@ -9,5 +10,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Nueva FOTO" />
+        android:background="@drawable/but_capture" />
 </FrameLayout>
