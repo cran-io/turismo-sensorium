@@ -16,13 +16,13 @@ public class UploadHandler {
     private static RestAdapter mApiAdapter;
     private static ApiService mApiService;
 
-    private static final String ENDPOINT = "http://www.cran.io";
+    private static final String ENDPOINT = "http://192.168.1.1:3000";
 
     public static ApiService getInstance() {
         if (mApiService == null) {
             mApiAdapter = new RestAdapter.Builder()
                     .setEndpoint(ENDPOINT)
-                    .setLogLevel(RestAdapter.LogLevel.FULL)
+                    .setLogLevel(RestAdapter.LogLevel.BASIC)
                     .build();
             mApiService = mApiAdapter.create(ApiService.class);
         }
@@ -31,7 +31,7 @@ public class UploadHandler {
 
     public interface ApiService {
         @Multipart
-        @POST("/upload")
+        @POST("/image/upload")
         void upload(@Part("picture") TypedFile picture, Callback<Response> cb);
     }
 }
