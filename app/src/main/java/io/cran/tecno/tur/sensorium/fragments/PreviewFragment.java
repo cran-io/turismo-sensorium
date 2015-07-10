@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +18,11 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 
 import io.cran.tecno.tur.sensorium.R;
+import io.cran.tecno.tur.sensorium.net.UploadHandler;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 
 public class PreviewFragment extends Fragment {
 
@@ -23,6 +30,10 @@ public class PreviewFragment extends Fragment {
     public static final String PICTURE_FILE = "picture";
     private Listener mListener;
     private File mTakedPicture;
+    private CheckBox mTOSCheckbox;
+    private ProgressBar mProgressBar;
+    private Button mButtonConfirm;
+    private Button mButtonRetry;
 
     public PreviewFragment() {
     }
@@ -46,13 +57,15 @@ public class PreviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_preview, container, false);
         ImageView picturePreview = (ImageView) root.findViewById(R.id.picturePreview);
+        mTOSCheckbox = (CheckBox) root.findViewById(R.id.checkboxTOS);
+        mProgressBar = (ProgressBar) root.findViewById(R.id.progress);
         if (mTakedPicture.exists()) {
             Glide.with(this).load(mTakedPicture).into(picturePreview);
         }
 
-        Button buttonRetry = (Button) root.findViewById(R.id.buttonRetry);
-        Button buttonConfirm = (Button) root.findViewById(R.id.buttonConfirm);
-        buttonRetry.setOnClickListener(new View.OnClickListener() {
+        mButtonRetry = (Button) root.findViewById(R.id.buttonRetry);
+        mButtonConfirm = (Button) root.findViewById(R.id.buttonConfirm);
+        mButtonRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mTakedPicture != null && !mTakedPicture.delete()) {
@@ -63,16 +76,58 @@ public class PreviewFragment extends Fragment {
             }
         });
 
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+        mButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Post and wait for success before showing "Thanks" screen
-                //TODO: POST: if success, show "thanks" if fail, stay here.
-                Toast.makeText(getActivity(), "Subiendo foto...", Toast.LENGTH_SHORT).show();
-                mListener.showGoodbye();
+                if (mTOSCheckbox.isChecked()) {
+                    uploadPicture(mTakedPicture);
+                } else {
+                    Toast.makeText(getActivity(), "Primero acepta los TOS", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+        updateUI(false);
+
         return root;
+    }
+
+    private void updateUI(boolean isUploading) {
+        if (isUploading) {
+            mTOSCheckbox.setEnabled(false);
+            mProgressBar.setVisibility(View.VISIBLE);
+            mButtonRetry.setEnabled(false);
+            mButtonConfirm.setEnabled(false);
+        } else {
+            mTOSCheckbox.setEnabled(true);
+            mProgressBar.setVisibility(View.INVISIBLE);
+            mButtonRetry.setEnabled(true);
+            mButtonConfirm.setEnabled(true);
+        }
+    }
+
+    private void uploadPicture(File file) {
+        Toast.makeText(getActivity(), "Subiendo foto...", Toast.LENGTH_SHORT).show();
+        updateUI(true);
+        UploadHandler.getInstance().upload(new TypedFile("image/jpeg", file), new Callback<Response>() {
+            @Override
+            public void success(Response response, Response response2) {
+                mListener.showGoodbye();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                String msg = "ERROR";
+                if (error != null) {
+                    if (error.getKind() == RetrofitError.Kind.NETWORK) {
+                        msg = "ERROR: Chequea la conexión a internet";
+                    } else if (error.getKind() == RetrofitError.Kind.HTTP) {
+                        msg = "ERROR: " + error.getMessage();
+                    }
+                }
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+                updateUI(false);
+            }
+        });
     }
 
     @Override

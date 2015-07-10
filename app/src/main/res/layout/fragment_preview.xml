@@ -16,6 +16,19 @@
         android:layout_height="wrap_content"
         android:text="Confirmar" />
 
+    <CheckBox
+        android:id="@+id/checkboxTOS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Acepto Términos y Condiciones" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="800dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
     <Button
         android:id="@+id/buttonRetry"
         android:layout_width="wrap_content"
