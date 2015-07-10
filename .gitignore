@@ -33,7 +33,7 @@ proguard/
 gen-external-apklibs
 
 # Android Studio
-*.iml
+*/*.iml
 .idea
 
 ### Gradle ###
