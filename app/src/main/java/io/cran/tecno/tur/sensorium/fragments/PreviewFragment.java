@@ -3,7 +3,6 @@ package io.cran.tecno.tur.sensorium.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 
@@ -46,7 +47,7 @@ public class PreviewFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_preview, container, false);
         ImageView picturePreview = (ImageView) root.findViewById(R.id.picturePreview);
         if (mTakedPicture.exists()) {
-            picturePreview.setImageURI(Uri.fromFile(mTakedPicture));
+            Glide.with(this).load(mTakedPicture).into(picturePreview);
         }
 
         Button buttonRetry = (Button) root.findViewById(R.id.buttonRetry);
@@ -54,7 +55,10 @@ public class PreviewFragment extends Fragment {
         buttonRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTakedPicture.deleteOnExit();
+                if (mTakedPicture != null && !mTakedPicture.delete()) {
+                    mTakedPicture.deleteOnExit();
+                    mTakedPicture = null;
+                }
                 getFragmentManager().popBackStack();
             }
         });

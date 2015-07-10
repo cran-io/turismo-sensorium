@@ -6,9 +6,9 @@
 
     <ImageView
         android:id="@+id/picturePreview"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
+        android:layout_width="700dp"
+        android:layout_height="500dp"
+        android:scaleType="fitCenter" />
 
     <Button
         android:id="@+id/buttonConfirm"
