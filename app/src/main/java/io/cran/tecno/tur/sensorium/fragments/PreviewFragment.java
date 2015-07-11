@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -32,8 +31,8 @@ public class PreviewFragment extends Fragment {
     private File mTakedPicture;
     private CheckBox mTOSCheckbox;
     private ProgressBar mProgressBar;
-    private Button mButtonConfirm;
-    private Button mButtonRetry;
+    private ImageView mButtonConfirm;
+    private ImageView mButtonRetry;
 
     public PreviewFragment() {
     }
@@ -63,8 +62,8 @@ public class PreviewFragment extends Fragment {
             Glide.with(this).load(mTakedPicture).into(picturePreview);
         }
 
-        mButtonRetry = (Button) root.findViewById(R.id.buttonRetry);
-        mButtonConfirm = (Button) root.findViewById(R.id.buttonConfirm);
+        mButtonRetry = (ImageView) root.findViewById(R.id.buttonRetry);
+        mButtonConfirm = (ImageView) root.findViewById(R.id.buttonConfirm);
         mButtonRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

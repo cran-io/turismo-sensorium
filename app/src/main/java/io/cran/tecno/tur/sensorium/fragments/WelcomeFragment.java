@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import io.cran.tecno.tur.sensorium.R;
 
@@ -19,7 +19,7 @@ public class WelcomeFragment extends Fragment {
     public WelcomeFragment() {
     }
 
-    public static WelcomeFragment newInstance(){
+    public static WelcomeFragment newInstance() {
         return new WelcomeFragment();
     }
 
@@ -28,7 +28,7 @@ public class WelcomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_welcome, container, false);
-        Button buttonCamera = (Button) root.findViewById(R.id.buttonCamera);
+        ImageView buttonCamera = (ImageView) root.findViewById(R.id.buttonCamera);
         buttonCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,20 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ov_main"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:orientation="vertical"
     tools:context="io.cran.tecno.tur.sensorium.fragments.WelcomeFragment">
 
-    <Button
+
+    <ImageView
         android:id="@+id/buttonCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/but_capture" />
+        android:layout_marginTop="100dp"
+        android:background="@drawable/btn_capture"
+        android:src="@drawable/btn_capture" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
         android:src="@drawable/logo" />
+
 </LinearLayout>

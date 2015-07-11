@@ -8,31 +8,68 @@
         android:id="@+id/picturePreview"
         android:layout_width="700dp"
         android:layout_height="500dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
         android:scaleType="fitCenter" />
 
-    <Button
-        android:id="@+id/buttonConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirmar" />
 
-    <CheckBox
-        android:id="@+id/checkboxTOS"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="Acepto Términos y Condiciones" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkboxTOS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:button="@drawable/btn_checkbox"
+            android:checked="true"
+            android:gravity="left"
+            android:text="Acepto Términos y Condiciones" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:button="@drawable/btn_checkbox"
+            android:checked="true"
+            android:text="Acepto Términos y Condiciones"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/buttonConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:src="@drawable/btn_confirm"
+            android:text="Confirmar" />
+
+        <ImageView
+            android:id="@+id/buttonRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/btn_retry" />
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="800dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"/>
 
-    <Button
-        android:id="@+id/buttonRetry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/but_retry" />
 
 </LinearLayout>
